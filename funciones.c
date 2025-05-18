@@ -5,16 +5,6 @@
 #define MAX_RECURSOS 5
 #define MAX_NOMBRE 50
 
-//Colores
-#define Reset  "\033[0m"
-#define Negro   "\033[30m"
-#define Rojo   "\033[31m"
-#define Verde   "\033[32m"
-#define Amarillo "\033[33m"
-#define Azul    "\033[34m"
-#define Magenta "\033[35m"
-#define Cyan    "\033[36m"
-#define Blanco  "\033[37m"
 
 char nombresProductos[MAX_PRODUCTOS][MAX_NOMBRE];
 int demandaProductos[MAX_PRODUCTOS];
@@ -40,12 +30,12 @@ int leerEntero(const char *msg, int min, int max) {
     while (1) {
         printf("%s", msg);
         if (scanf("%d%c", &val, &term) != 2 || term != '\n') {
-            printf(Rojo"  >> Entrada invalida. Ingrese un numero entero.\n",Reset);
+            printf("  >> Entrada invalida. Ingrese un numero entero.\n");
             limpiarBuffer();
             continue;
         }
         if (val < min || val > max) {
-            printf(Rojo"  >> Debe estar entre %d y %d.\n",Reset, min, max);
+            printf("  >> Debe estar entre %d y %d.\n", min, max);
             continue;
         }
         return val;
@@ -59,7 +49,7 @@ void leerCadena(const char *msg, char *dest, int maxLen) {
         size_t len = strlen(dest);
         if (len > 0 && dest[len - 1] == '\n') dest[len - 1] = '\0';
         if (strlen(dest) == 0) {
-            printf(Rojo"  >> No puede estar vacio.\n",Reset);
+            printf("  >> No puede estar vacio.\n");
             continue;
         }
         return;
@@ -77,16 +67,16 @@ int cadenasIguales(const char *a, const char *b) {
 
 void ingresarProductos() {
     if (ingresoProductosBloqueado) {
-        printf(Rojo"Ya no es posible ingresar mas productos.\n"Reset);
+        printf("Ya no es posible ingresar mas productos.\n");
         return;
     }
     int disponibles = MAX_PRODUCTOS - numeroProductos;
     if (disponibles == 0) {
         ingresoProductosBloqueado = 1;
-        printf(Rojo"Ya se ingreso el máximo de productos.\n",Reset);
+        printf("Ya se ingreso el máximo de productos.\n");
         return;
     }
-    printf(Azul"\n=== Ingreso de Productos (Tarjetas Graficas) ===\n",Reset);
+    printf("\n=== Ingreso de Productos (Tarjetas Graficas) ===\n");
     printf("Puede ingresar hasta %d productos mas.\n", disponibles);
     int cantidad = leerEntero("¿Cuantos desea ingresar? ", 1, disponibles);
 
@@ -99,23 +89,23 @@ void ingresarProductos() {
     }
     if (numeroProductos == MAX_PRODUCTOS) {
         ingresoProductosBloqueado = 1;
-        printf(Azul"\nSe alcanzo el límite de productos.\n",Reset);
+        printf("\nSe alcanzo el límite de productos.\n");
     }
 }
 
 void ingresarRecursos() {
     if (numeroProductos == 0) {
-        printf(Rojo"Primero debe ingresar al menos un producto.\n"Reset);
+        printf("Primero debe ingresar al menos un producto.\n");
         return;
     }
     if (ingresoRecursosBloqueado) {
-        printf(Rojo"Ya no es posible ingresar mas recursos.\n",Reset);
+        printf("Ya no es posible ingresar mas recursos.\n");
         return;
     }
     int disponibles = MAX_RECURSOS - numeroRecursos;
     if (disponibles == 0) {
         ingresoRecursosBloqueado = 1;
-        printf(Rojo"Ya se ingreso el maximo de recursos.\n",Reset);
+        printf("Ya se ingreso el maximo de recursos.\n");
         return;
     }
     printf("\n=== Ingreso de Recursos ===\n");
@@ -135,7 +125,7 @@ void ingresarRecursos() {
     }
     if (numeroRecursos == MAX_RECURSOS) {
         ingresoRecursosBloqueado = 1;
-        printf(Azul"\nSe alcanzo el limite de recursos.\n",Reset);
+        printf("\nSe alcanzo el limite de recursos.\n");
     }
 }
 
@@ -143,7 +133,7 @@ void fabricarProducto(int indice) {
     for (int j = 0; j < numeroRecursos; j++) {
         stockRecursos[j] -= requerimientos[indice][j] * demandaProductos[indice];
     }
-    printf(Verde"  => Produccion de '%s' realizada. Stock actualizado.\n",Reset, nombresProductos[indice]);
+    printf("  => Produccion de '%s' realizada. Stock actualizado.\n", nombresProductos[indice]);
 }
 
 void calcularProduccion() {
@@ -152,7 +142,7 @@ void calcularProduccion() {
         return;
     }
 
-    printf(Azul"\n=== Calculo de Produccion ===\n",Reset);
+    printf("\n=== Calculo de Produccion ===\n");
     int horasDisponibles = leerEntero("Ingrese las horas disponibles de produccion: ", 1, 100000);
     int algunViable = 0;
 
@@ -174,7 +164,7 @@ void calcularProduccion() {
             if (totalNecesario > stockRecursos[j]) puede = 0;
         }
 
-        printf("  => %s produccion\n", puede ? Verde"VIABLE"Reset : Rojo"NO VIABLE"Reset);
+        printf("  => %s produccion\n", puede ? "VIABLE" : "NO VIABLE");
 
         if (puede) {
             algunViable = 1;
@@ -187,19 +177,19 @@ void calcularProduccion() {
             if (respuesta == 's' || respuesta == 'S') {
                 fabricarProducto(i);
             } else {
-                printf(Rojo"  => Produccion no realizada.\n", Reset);
+                printf("  => Produccion no realizada.\n");
             }
         }
     }
 
     if (!algunViable) {
-        printf(Rojo"\nNo hay productos viables para fabricar con los recursos y tiempo disponibles.\n", Reset);
+        printf("\nNo hay productos viables para fabricar con los recursos y tiempo disponibles.\n");
     }
 }
 
 void reabastecerRecurso() {
     if (numeroRecursos == 0) {
-        printf(Rojo"No hay recursos para reabastecer.\n", Reset);
+        printf("No hay recursos para reabastecer.\n");
         return;
     }
     char nombre[MAX_NOMBRE];
@@ -212,12 +202,12 @@ void reabastecerRecurso() {
             return;
         }
     }
-    printf(Rojo"Recurso no encontrado.\n",Reset);
+    printf("Recurso no encontrado.\n");
 }
 
 void eliminarElemento() {
     if (numeroProductos == 0 && numeroRecursos == 0) {
-        printf(Rojo"No hay productos ni recursos para eliminar.\n",Reset);
+        printf("No hay productos ni recursos para eliminar.\n");
         return;
     }
     int tipo = leerEntero("¿Desea eliminar producto (1) o recurso (0)? ", 0, 1);
@@ -250,7 +240,7 @@ void eliminarElemento() {
                 }
                 numeroProductos--;
                 ingresoProductosBloqueado = 0;
-                printf(Verde"Producto eliminado.\n",Reset);
+                printf("Producto eliminado.\n");
                 return;
             }
         }
@@ -292,11 +282,11 @@ void editarElemento() {
                 leerCadena("Nuevo nombre: ", nombresProductos[i], MAX_NOMBRE);
                 demandaProductos[i] = leerEntero("Nueva demanda esperada: ", 1, 10000);
                 tiempoProductos[i] = leerEntero("Nuevo tiempo por unidad (horas): ", 1, 1000);
-                printf(Verde"Producto editado correctamente.\n", Reset);
+                printf("Producto editado correctamente.\n");
                 return;
             }
         }
-        printf(Rojo"Producto no encontrado.\n", Reset);
+        printf("Producto no encontrado.\n");
     } else if (tipo == 0 && numeroRecursos > 0) {
         printf("\nRecursos:\n");
         for (int i = 0; i < numeroRecursos; i++) {
@@ -315,19 +305,19 @@ void editarElemento() {
                     snprintf(mensaje, sizeof(mensaje), "¿Cuántos '%s' necesita '%s'? ", nombresRecursos[i], nombresProductos[j]);
                     requerimientos[j][i] = leerEntero(mensaje, 0, 10000);
                 }
-                printf(Verde"Recurso editado correctamente.\n", Reset);
+                printf("Recurso editado correctamente.\n");
                 return;
             }
         }
-        printf(Rojo"Recurso no encontrado.\n", Reset);
+        printf("Recurso no encontrado.\n");
     } else {
-        printf(Rojo"No hay elementos para editar.\n", Reset);
+        printf("No hay elementos para editar.\n");
     }
 }
 
 void listarDatos() {
     if (numeroProductos == 0 && numeroRecursos == 0) {
-        printf(Rojo"No hay productos ni recursos ingresados para mostrar.\n", Reset);
+        printf("No hay productos ni recursos ingresados para mostrar.\n");
         return;
     }
 
@@ -349,7 +339,7 @@ void listarDatos() {
 
     printf("\n=== Listado de Recursos ===\n");
     if (numeroRecursos == 0) {
-        printf(Rojo"No hay recursos ingresados.\n", Reset);
+        printf("No hay recursos ingresados.\n");
     } else {
         for (int i = 0; i < numeroRecursos; i++) {
             printf("Recurso #%d: %s\n", i + 1, nombresRecursos[i]);
@@ -379,5 +369,5 @@ void eliminarTodo() {
         stockRecursos[i] = 0;
     }
 
-    printf(Verde"Todos los datos fueron eliminados. El programa ha sido reiniciado.\n", Reset);
+    printf("Todos los datos fueron eliminados. El programa ha sido reiniciado.\n");
 }

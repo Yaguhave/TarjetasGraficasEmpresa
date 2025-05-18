@@ -2,13 +2,13 @@
 #include <string.h>
 #include "funciones.h"
 
-int mainmenu() {
+int main() {
     int opcion;
     do {
         printf("\n=== Menu Principal ===\n");
         printf("1) Ingresar productos\n");
         printf("2) Ingresar recursos\n");
-        printf("3) Calcular producción\n");
+        printf("3) Calcular produccion\n");
         printf("4) Reabastecer recurso\n");
         printf("5) Eliminar producto o recurso\n");
         printf("6) Editar producto o recurso\n");
