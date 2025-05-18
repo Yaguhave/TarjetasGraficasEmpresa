@@ -2,10 +2,10 @@
 #include <string.h>
 #include "funciones.h"
 
-int main() {
+int mainmenu() {
     int opcion;
     do {
-        printf("\n=== Menú Principal ===\n");
+        printf("\n=== Menu Principal ===\n");
         printf("1) Ingresar productos\n");
         printf("2) Ingresar recursos\n");
         printf("3) Calcular producción\n");
@@ -16,7 +16,7 @@ int main() {
         printf("8) Eliminar todo\n");
         printf("8) Salir\n");
 
-        opcion = leerEntero("Seleccione una opción: ", 1, 7);
+        opcion = leerEntero("Seleccione una opcion: ", 1, 7);
 
         switch (opcion) {
             case 1: ingresarProductos(); break;
@@ -27,7 +27,7 @@ int main() {
             case 6: editarElemento(); break;
             case 7: listarDatos(); break;
             case 8: eliminarTodo(); break;
-            case 9: printf("Adiós.\n"); break;
+            case 9: printf("Adios.\n"); break;
 
         }
     } while (opcion != 7);
