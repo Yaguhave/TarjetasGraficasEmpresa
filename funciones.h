@@ -1,0 +1,13 @@
+void limpiarBuffer();
+int leerEntero(const char *msg, int min, int max);
+void leerCadena(const char *msg, char *dest, int maxLen);
+int cadenasIguales(const char *a, const char *b);
+void ingresarProductos();
+void ingresarRecursos();
+void fabricarProducto(int indice);
+void calcularProduccion();
+void reabastecerRecurso();
+void eliminarElemento();
+void editarElemento();
+void listarDatos();
+void eliminarTodo();
