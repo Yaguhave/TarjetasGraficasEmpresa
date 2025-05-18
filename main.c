@@ -12,9 +12,9 @@ int main() {
         printf("4) Reabastecer recurso\n");
         printf("5) Eliminar producto o recurso\n");
         printf("6) Editar producto o recurso\n");
-        printf("6) Listar datos\n");
+        printf("7) Listar datos\n");
         printf("8) Eliminar todo\n");
-        printf("8) Salir\n");
+        printf("9) Salir\n");
 
         opcion = leerEntero("Seleccione una opcion: ", 1, 7);
 
