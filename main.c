@@ -16,7 +16,7 @@ int main() {
         printf("8) Eliminar todo\n");
         printf("9) Salir\n");
 
-        opcion = leerEntero("Seleccione una opcion: ", 1, 7);
+        opcion = leerEntero("Seleccione una opcion: ", 1, 9);
 
         switch (opcion) {
             case 1: ingresarProductos(); break;
@@ -30,6 +30,6 @@ int main() {
             case 9: printf("Adios.\n"); break;
 
         }
-    } while (opcion != 7);
+    } while (opcion != 9);
     return 0;
 }
