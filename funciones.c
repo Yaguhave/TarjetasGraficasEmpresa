@@ -73,12 +73,12 @@ void ingresarProductos() {
     int disponibles = MAX_PRODUCTOS - numeroProductos;
     if (disponibles == 0) {
         ingresoProductosBloqueado = 1;
-        printf("Ya se ingreso el máximo de productos.\n");
+        printf("Ya se ingreso el maximo de productos.\n");
         return;
     }
     printf("\n=== Ingreso de Productos (Tarjetas Graficas) ===\n");
     printf("Puede ingresar hasta %d productos mas.\n", disponibles);
-    int cantidad = leerEntero("¿Cuantos desea ingresar? ", 1, disponibles);
+    int cantidad = leerEntero("Cuantos desea ingresar? ", 1, disponibles);
 
     for (int i = 0; i < cantidad; i++) {
         printf("\nProducto #%d:\n", numeroProductos + 1);
@@ -89,7 +89,7 @@ void ingresarProductos() {
     }
     if (numeroProductos == MAX_PRODUCTOS) {
         ingresoProductosBloqueado = 1;
-        printf("\nSe alcanzo el límite de productos.\n");
+        printf("\nSe alcanzo el limite de productos.\n");
     }
 }
 
@@ -110,7 +110,7 @@ void ingresarRecursos() {
     }
     printf("\n=== Ingreso de Recursos ===\n");
     printf("Puede ingresar hasta %d recursos mas.\n", disponibles);
-    int cantidad = leerEntero("¿Cuántos desea ingresar? ", 1, disponibles);
+    int cantidad = leerEntero("Cuantos desea ingresar? ", 1, disponibles);
 
     for (int i = 0; i < cantidad; i++) {
         printf("\nRecurso #%d:\n", numeroRecursos + 1);
@@ -170,7 +170,7 @@ void calcularProduccion() {
             algunViable = 1;
             char respuesta;
             char linea[10];
-            printf("¿Desea fabricar '%s'? (s/n): ", nombresProductos[i]);
+            printf("Desea fabricar '%s'? (s/n): ", nombresProductos[i]);
             fgets(linea, sizeof(linea), stdin);
             respuesta = linea[0];
 
@@ -196,7 +196,7 @@ void reabastecerRecurso() {
     leerCadena("Ingrese el nombre del recurso a reabastecer: ", nombre, MAX_NOMBRE);
     for (int i = 0; i < numeroRecursos; i++) {
         if (cadenasIguales(nombre, nombresRecursos[i])) {
-            int cantidad = leerEntero("¿Cuánto desea añadir al stock? ", 1, 100000);
+            int cantidad = leerEntero("Cuanto desea aumentar al stock? ", 1, 100000);
             stockRecursos[i] += cantidad;
             printf("Stock actualizado. Nuevo stock de '%s': %d\n", nombre, stockRecursos[i]);
             return;
@@ -210,7 +210,7 @@ void eliminarElemento() {
         printf("No hay productos ni recursos para eliminar.\n");
         return;
     }
-    int tipo = leerEntero("¿Desea eliminar producto (1) o recurso (0)? ", 0, 1);
+    int tipo = leerEntero("Desea eliminar producto (1) o recurso (0)? ", 0, 1);
 
     if (tipo == 1) {
         printf("\nProductos:\n");
@@ -266,7 +266,7 @@ void eliminarElemento() {
 }
 
 void editarElemento() {
-    int tipo = leerEntero("¿Desea editar producto (1) o recurso (0)? ", 0, 1);
+    int tipo = leerEntero("Desea editar producto (1) o recurso (0)? ", 0, 1);
 
     if (tipo == 1 && numeroProductos > 0) {
         printf("\nProductos:\n");
@@ -302,7 +302,7 @@ void editarElemento() {
                 stockRecursos[i] = leerEntero("Nuevo stock: ", 0, 100000);
                 for (int j = 0; j < numeroProductos; j++) {
                     char mensaje[100];
-                    snprintf(mensaje, sizeof(mensaje), "¿Cuántos '%s' necesita '%s'? ", nombresRecursos[i], nombresProductos[j]);
+                    snprintf(mensaje, sizeof(mensaje), "Cuantos '%s' necesita '%s'? ", nombresRecursos[i], nombresProductos[j]);
                     requerimientos[j][i] = leerEntero(mensaje, 0, 10000);
                 }
                 printf("Recurso editado correctamente.\n");
